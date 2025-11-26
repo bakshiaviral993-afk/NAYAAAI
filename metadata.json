@@ -1,0 +1,7 @@
+{
+  "name": "NyayaAI - Indian Legal Assistant",
+  "description": "A professional AI-powered legal assistant specializing in Indian Law (IPC, BNS, Bare Acts) for legal professionals.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
