@@ -17,10 +17,19 @@ const AIBE_EXAMS = [
     { id: '13', name: 'AIBE XIII', year: '2018', type: 'AIBE' },
     { id: '12', name: 'AIBE XII', year: '2018 (Jan)', type: 'AIBE' },
     { id: '11', name: 'AIBE XI', year: '2017', type: 'AIBE' },
+    { id: '10', name: 'AIBE X', year: '2017 (Mar)', type: 'AIBE' },
 ];
 
 // Data for BCI Qualifying Exams (Foreign Law Degrees)
 const QUALIFYING_EXAMS = [
+    // 18th Qualifying Exam (Recent)
+    { id: '18-p1', name: 'Paper 1: Constitutional Law', year: '18th Qualifying Exam', type: 'QUALIFYING' },
+    { id: '18-p2', name: 'Paper 2: Contract Law & Negotiable Instruments', year: '18th Qualifying Exam', type: 'QUALIFYING' },
+    { id: '18-p3', name: 'Paper 3: Company Law', year: '18th Qualifying Exam', type: 'QUALIFYING' },
+    { id: '18-p4', name: 'Paper 4: Civil Procedure Code', year: '18th Qualifying Exam', type: 'QUALIFYING' },
+    { id: '18-p5', name: 'Paper 5: Criminal Procedure Code', year: '18th Qualifying Exam', type: 'QUALIFYING' },
+    { id: '18-p6', name: 'Paper 6: Legal Profession & Ethics', year: '18th Qualifying Exam', type: 'QUALIFYING' },
+
     // 15th Qualifying Exam (Sept 2019)
     { id: '15-p1', name: 'Paper 1: Constitutional Law', year: '15th Qualifying Exam (Sept 2019)', type: 'QUALIFYING' },
     { id: '15-p2', name: 'Paper 2: Contract Law & Negotiable Instruments', year: '15th Qualifying Exam (Sept 2019)', type: 'QUALIFYING' },
@@ -36,6 +45,14 @@ const QUALIFYING_EXAMS = [
     { id: '14-p4', name: 'Paper 4: Civil Procedure Code', year: '14th Qualifying Exam (Nov 2018)', type: 'QUALIFYING' },
     { id: '14-p5', name: 'Paper 5: Criminal Procedure Code', year: '14th Qualifying Exam (Nov 2018)', type: 'QUALIFYING' },
     { id: '14-p6', name: 'Paper 6: Legal Profession & Ethics', year: '14th Qualifying Exam (Nov 2018)', type: 'QUALIFYING' },
+
+    // March 2014 Exam
+    { id: '2014-p1', name: 'Paper 1: Constitutional Law', year: 'Qualifying Exam (March 2014)', type: 'QUALIFYING' },
+    { id: '2014-p2', name: 'Paper 2: Contract Law', year: 'Qualifying Exam (March 2014)', type: 'QUALIFYING' },
+    { id: '2014-p3', name: 'Paper 3: Company Law', year: 'Qualifying Exam (March 2014)', type: 'QUALIFYING' },
+    { id: '2014-p4', name: 'Paper 4: Civil Procedure Code', year: 'Qualifying Exam (March 2014)', type: 'QUALIFYING' },
+    { id: '2014-p5', name: 'Paper 5: Criminal Procedure Code', year: 'Qualifying Exam (March 2014)', type: 'QUALIFYING' },
+    { id: '2014-p6', name: 'Paper 6: Legal Profession', year: 'Qualifying Exam (March 2014)', type: 'QUALIFYING' },
 ];
 
 const SUBJECT_WEIGHTAGE = [
@@ -114,7 +131,8 @@ const ExamRepository: React.FC<ExamRepositoryProps> = ({ isOpen, onClose }) => {
   };
 
   const handleOriginalDownload = (exam: typeof AIBE_EXAMS[0]) => {
-      const query = `${exam.name} ${exam.year} original question paper pdf bar council of india`;
+      // Use filetype:pdf to attempt direct file discovery
+      const query = `${exam.name} ${exam.year} question paper filetype:pdf`;
       window.open(`https://www.google.com/search?q=${encodeURIComponent(query)}`, '_blank');
   };
 
@@ -366,17 +384,18 @@ const ExamRepository: React.FC<ExamRepositoryProps> = ({ isOpen, onClose }) => {
                                         ) : (
                                             <>
                                                 <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
-                                                <span>AI Compiled PDF</span>
+                                                <span>AI Compile</span>
                                             </>
                                         )}
                                     </button>
                                     
                                     <button 
                                         onClick={() => handleOriginalDownload(exam)}
-                                        className="flex-shrink-0 flex items-center justify-center p-2 rounded border bg-slate-800 border-slate-700 text-slate-400 hover:text-slate-200 hover:border-slate-500 transition-all"
-                                        title="Find Original PDF on Web"
+                                        className="flex-shrink-0 flex items-center gap-2 px-3 py-2 rounded border bg-slate-800 border-slate-700 text-slate-400 hover:text-blue-400 hover:border-blue-900 transition-all group/btn"
+                                        title="Search for Original PDF File"
                                     >
                                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                                        <span className="text-[10px] font-bold uppercase hidden group-hover/btn:inline-block">Official PDF</span>
                                     </button>
                                 </div>
                             </div>
@@ -392,7 +411,7 @@ const ExamRepository: React.FC<ExamRepositoryProps> = ({ isOpen, onClose }) => {
         </div>
         
         <div className="p-3 border-t border-slate-800 bg-slate-950/50 flex justify-between items-center text-[10px] text-slate-600 font-sans">
-             <span>* AI-Compiled based on BCI syllabus. Original PDFs available via web search.</span>
+             <span>* AI-Compiled based on BCI syllabus. Use "Official PDF" button for scanned copies.</span>
              <a 
                 href="http://www.barcouncilofindia.org/" 
                 target="_blank" 
