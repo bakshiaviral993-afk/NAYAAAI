@@ -209,17 +209,17 @@ const ExamRepository: React.FC<ExamRepositoryProps> = ({ isOpen, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-4">
-      <div className="bg-slate-900 rounded-lg shadow-2xl max-w-5xl w-full border border-slate-700 flex flex-col max-h-[90vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-md p-4">
+      <div className="bg-[#0A1A2F] border border-[#CBA135]/40 shadow-2xl max-w-5xl w-full flex flex-col max-h-[90vh]">
         {/* Modal Header */}
-        <div className="flex flex-col p-4 border-b border-slate-800 bg-slate-950/50 gap-4">
+        <div className="flex flex-col p-4 border-b border-[#1E3A5F] bg-[#112240] gap-4">
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                    <div className="p-2 bg-amber-900/20 rounded-lg border border-amber-900/30">
-                        <svg className="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+                    <div className="p-2 bg-[#00A86B]/20 border border-[#00A86B]/40">
+                        <svg className="w-5 h-5 text-[#00A86B]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
                     </div>
                     <div>
-                        <h2 className="text-lg font-bold text-slate-100 serif tracking-wide">Exam Repository</h2>
+                        <h2 className="text-lg font-bold text-slate-100 serif-heading tracking-wide">Exam Repository</h2>
                         <p className="text-[10px] text-slate-500 uppercase tracking-widest">Official Bar Council Archives</p>
                     </div>
                 </div>
@@ -230,12 +230,12 @@ const ExamRepository: React.FC<ExamRepositoryProps> = ({ isOpen, onClose }) => {
             
             {/* Tabs & Search */}
             <div className="flex flex-col md:flex-row gap-4 justify-between items-center">
-                <div className="flex p-1 bg-slate-950 rounded-lg border border-slate-800 w-full md:w-auto">
+                <div className="flex p-1 bg-[#0A1A2F] border border-[#1E3A5F] w-full md:w-auto">
                     <button 
                         onClick={() => setActiveTab('AIBE')}
-                        className={`flex-1 md:flex-none px-4 py-2 rounded text-xs font-bold uppercase tracking-wider transition-all ${
+                        className={`flex-1 md:flex-none px-4 py-2 text-xs font-bold uppercase tracking-wider transition-all ${
                             activeTab === 'AIBE' 
-                            ? 'bg-amber-900/20 text-amber-500 shadow-sm' 
+                            ? 'bg-[#CBA135] text-[#0A1A2F]' 
                             : 'text-slate-500 hover:text-slate-300'
                         }`}
                     >
@@ -243,9 +243,9 @@ const ExamRepository: React.FC<ExamRepositoryProps> = ({ isOpen, onClose }) => {
                     </button>
                     <button 
                         onClick={() => setActiveTab('QUALIFYING')}
-                        className={`flex-1 md:flex-none px-4 py-2 rounded text-xs font-bold uppercase tracking-wider transition-all ${
+                        className={`flex-1 md:flex-none px-4 py-2 text-xs font-bold uppercase tracking-wider transition-all ${
                             activeTab === 'QUALIFYING' 
-                            ? 'bg-amber-900/20 text-amber-500 shadow-sm' 
+                            ? 'bg-[#CBA135] text-[#0A1A2F]' 
                             : 'text-slate-500 hover:text-slate-300'
                         }`}
                     >
@@ -253,9 +253,9 @@ const ExamRepository: React.FC<ExamRepositoryProps> = ({ isOpen, onClose }) => {
                     </button>
                     <button 
                         onClick={() => setActiveTab('SYLLABUS')}
-                        className={`flex-1 md:flex-none px-4 py-2 rounded text-xs font-bold uppercase tracking-wider transition-all ${
+                        className={`flex-1 md:flex-none px-4 py-2 text-xs font-bold uppercase tracking-wider transition-all ${
                             activeTab === 'SYLLABUS' 
-                            ? 'bg-amber-900/20 text-amber-500 shadow-sm' 
+                            ? 'bg-[#CBA135] text-[#0A1A2F]' 
                             : 'text-slate-500 hover:text-slate-300'
                         }`}
                     >
@@ -270,7 +270,7 @@ const ExamRepository: React.FC<ExamRepositoryProps> = ({ isOpen, onClose }) => {
                         </div>
                         <input
                             type="text"
-                            className="block w-full pl-10 pr-3 py-2 border border-slate-700 rounded bg-[#0f1115] text-slate-300 placeholder-slate-600 focus:outline-none focus:border-amber-700/50 focus:ring-1 focus:ring-amber-900/20 text-sm font-sans"
+                            className="block w-full pl-10 pr-3 py-2 border border-[#1E3A5F] bg-[#0A1A2F] text-slate-300 placeholder-slate-600 focus:outline-none focus:border-[#CBA135] focus:ring-1 focus:ring-[#CBA135]/50 text-sm font-sans"
                             placeholder="Search Year or Subject..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
@@ -281,19 +281,19 @@ const ExamRepository: React.FC<ExamRepositoryProps> = ({ isOpen, onClose }) => {
         </div>
 
         {/* Content Body */}
-        <div className="overflow-y-auto p-4 flex-1 scrollbar-hide">
+        <div className="overflow-y-auto p-4 flex-1 scrollbar-hide bg-[#0A1A2F]">
             
             {/* SYLLABUS TAB CONTENT */}
             {activeTab === 'SYLLABUS' && (
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     <div className="lg:col-span-2 space-y-4">
-                        <div className="bg-[#13151a] p-6 rounded-lg border border-slate-800">
-                             <h3 className="text-xl font-bold text-slate-200 serif mb-4 border-b border-slate-700 pb-2">AIBE Subject Weightage</h3>
+                        <div className="bg-[#112240] p-6 border border-[#1E3A5F]">
+                             <h3 className="text-xl font-bold text-slate-200 serif-heading mb-4 border-b border-slate-700 pb-2">AIBE Subject Weightage</h3>
                              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
                                 {SUBJECT_WEIGHTAGE.map((item, idx) => (
                                     <div key={idx} className="flex justify-between items-center text-sm border-b border-slate-800/50 py-2">
-                                        <span className="text-slate-400 font-serif">{item.subject}</span>
-                                        <span className="font-bold text-amber-600">{item.marks} Qs</span>
+                                        <span className="text-slate-400 font-sans">{item.subject}</span>
+                                        <span className="font-bold text-[#CBA135]">{item.marks} Qs</span>
                                     </div>
                                 ))}
                              </div>
@@ -305,11 +305,11 @@ const ExamRepository: React.FC<ExamRepositoryProps> = ({ isOpen, onClose }) => {
                     </div>
 
                     <div className="space-y-4">
-                        <div className="bg-amber-950/20 p-6 rounded-lg border border-amber-900/40">
-                            <h3 className="text-lg font-bold text-amber-500 serif mb-3">Recommended Material</h3>
+                        <div className="bg-[#112240] p-6 border border-[#CBA135]/30">
+                            <h3 className="text-lg font-bold text-[#CBA135] serif-heading mb-3">Recommended Material</h3>
                             <div className="flex items-start gap-4 mb-4">
-                                <div className="p-3 bg-amber-900/30 rounded border border-amber-800/50">
-                                    <svg className="w-8 h-8 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+                                <div className="p-3 bg-[#0A1A2F] border border-[#CBA135]/30">
+                                    <svg className="w-8 h-8 text-[#CBA135]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
                                 </div>
                                 <div>
                                     <h4 className="font-bold text-slate-200">Lawmann's Bare Acts</h4>
@@ -323,7 +323,7 @@ const ExamRepository: React.FC<ExamRepositoryProps> = ({ isOpen, onClose }) => {
                             </ul>
                             <button 
                                 onClick={() => window.open('https://www.google.com/search?q=Lawmann%27s+Bare+Act+25+Books+Set+AIBE', '_blank')}
-                                className="w-full mt-4 py-2 bg-amber-900/40 hover:bg-amber-900/60 text-amber-500 text-xs font-bold uppercase tracking-wider rounded border border-amber-800 transition-all"
+                                className="w-full mt-4 py-2 bg-[#CBA135]/10 hover:bg-[#CBA135]/20 text-[#CBA135] text-xs font-bold uppercase tracking-wider border border-[#CBA135]/50 transition-all"
                             >
                                 Find Book Set
                             </button>
@@ -337,20 +337,20 @@ const ExamRepository: React.FC<ExamRepositoryProps> = ({ isOpen, onClose }) => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {filteredExams.length > 0 ? (
                         filteredExams.map((exam) => (
-                        <div key={exam.id} className="bg-[#13151a] p-4 rounded-lg border border-slate-800 hover:border-amber-800/50 transition-all group relative overflow-hidden flex flex-col justify-between min-h-[140px]">
+                        <div key={exam.id} className="bg-[#112240] p-4 border border-[#1E3A5F] hover:border-[#CBA135] transition-all group relative overflow-hidden flex flex-col justify-between min-h-[140px]">
                             <div className="absolute top-0 right-0 p-2 opacity-5 group-hover:opacity-15 transition-opacity pointer-events-none">
-                                <svg className="w-16 h-16 text-amber-500" fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                                <svg className="w-16 h-16 text-[#CBA135]" fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
                             </div>
                             
                             <div className="relative z-10 pr-4">
                                 <div className="flex justify-between items-start">
-                                    <h3 className="text-base font-bold text-slate-200 serif leading-snug">{exam.name}</h3>
+                                    <h3 className="text-base font-bold text-slate-200 serif-heading leading-snug">{exam.name}</h3>
                                 </div>
-                                <span className="inline-block mt-2 px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 text-slate-400 border border-slate-700">
+                                <span className="inline-block mt-2 px-2 py-0.5 text-[10px] font-bold bg-[#0A1A2F] text-slate-400 border border-[#1E3A5F]">
                                     {exam.year}
                                 </span>
                                 {activeTab === 'QUALIFYING' && (
-                                    <span className="inline-block ml-2 mt-2 px-2 py-0.5 rounded text-[10px] font-bold bg-amber-950/30 text-amber-600 border border-amber-900/30">
+                                    <span className="inline-block ml-2 mt-2 px-2 py-0.5 text-[10px] font-bold bg-[#CBA135]/20 text-[#CBA135] border border-[#CBA135]/30">
                                         Subjective
                                     </span>
                                 )}
@@ -358,9 +358,9 @@ const ExamRepository: React.FC<ExamRepositoryProps> = ({ isOpen, onClose }) => {
 
                             <div className="mt-4 relative z-10 space-y-2">
                                 {loadingId === exam.id && (
-                                    <div className="w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
+                                    <div className="w-full bg-[#0A1A2F] h-1.5 overflow-hidden">
                                         <div 
-                                            className="bg-amber-600 h-full transition-all duration-300 ease-out"
+                                            className="bg-[#00A86B] h-full transition-all duration-300 ease-out"
                                             style={{ width: `${downloadProgress}%` }}
                                         ></div>
                                     </div>
@@ -370,10 +370,10 @@ const ExamRepository: React.FC<ExamRepositoryProps> = ({ isOpen, onClose }) => {
                                     <button 
                                         onClick={() => handleDownload(exam)}
                                         disabled={loadingId === exam.id}
-                                        className={`flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded font-medium text-xs transition-all border ${
+                                        className={`flex-1 flex items-center justify-center gap-2 py-2 px-3 font-medium text-xs transition-all border ${
                                             loadingId === exam.id
-                                            ? 'bg-slate-800 border-slate-700 text-slate-400 cursor-wait'
-                                            : 'bg-amber-900/10 border-amber-900/40 text-amber-600 hover:bg-amber-900/20 hover:text-amber-500'
+                                            ? 'bg-[#0A1A2F] border-[#1E3A5F] text-slate-400 cursor-wait'
+                                            : 'bg-[#00A86B] border-[#00A86B] text-white hover:bg-[#008C59]'
                                         }`}
                                     >
                                         {loadingId === exam.id ? (
@@ -391,7 +391,7 @@ const ExamRepository: React.FC<ExamRepositoryProps> = ({ isOpen, onClose }) => {
                                     
                                     <button 
                                         onClick={() => handleOriginalDownload(exam)}
-                                        className="flex-shrink-0 flex items-center gap-2 px-3 py-2 rounded border bg-slate-800 border-slate-700 text-slate-400 hover:text-blue-400 hover:border-blue-900 transition-all group/btn"
+                                        className="flex-shrink-0 flex items-center gap-2 px-3 py-2 border bg-[#0A1A2F] border-[#1E3A5F] text-slate-400 hover:text-[#CBA135] hover:border-[#CBA135] transition-all group/btn"
                                         title="Search for Original PDF File"
                                     >
                                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
@@ -410,13 +410,13 @@ const ExamRepository: React.FC<ExamRepositoryProps> = ({ isOpen, onClose }) => {
             )}
         </div>
         
-        <div className="p-3 border-t border-slate-800 bg-slate-950/50 flex justify-between items-center text-[10px] text-slate-600 font-sans">
+        <div className="p-3 border-t border-[#1E3A5F] bg-[#112240] flex justify-between items-center text-[10px] text-slate-500 font-sans">
              <span>* AI-Compiled based on BCI syllabus. Use "Official PDF" button for scanned copies.</span>
              <a 
                 href="http://www.barcouncilofindia.org/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="flex items-center gap-1 text-amber-700/80 hover:text-amber-600 transition-colors"
+                className="flex items-center gap-1 text-[#CBA135]/80 hover:text-[#CBA135] transition-colors"
              >
                 Visit Bar Council Official
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>

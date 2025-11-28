@@ -182,7 +182,7 @@ const ChatInterface = forwardRef<ChatInterfaceHandle, {}>((props, ref) => {
     }
   };
 
-  // PDF Generation Function
+  // PDF Generation Function (kept same but updated styling is purely visual in component)
   const handleDownloadPDF = async () => {
     if (isPdfGenerating) return;
     setIsPdfGenerating(true);
@@ -208,10 +208,10 @@ const ChatInterface = forwardRef<ChatInterfaceHandle, {}>((props, ref) => {
            // Header
            doc.setFont("times", "bold");
            doc.setFontSize(10);
-           doc.setTextColor(60, 60, 60); // Charcoal
+           doc.setTextColor(10, 26, 47); // Midnight Blue
            doc.text("NYAYA AI - INDIAN LEGAL INTELLIGENCE", pageWidth / 2, 15, { align: "center" });
            
-           doc.setDrawColor(200, 200, 200);
+           doc.setDrawColor(203, 161, 53); // Gold
            doc.setLineWidth(0.5);
            doc.line(margin, 18, pageWidth - margin, 18);
 
@@ -308,7 +308,7 @@ const ChatInterface = forwardRef<ChatInterfaceHandle, {}>((props, ref) => {
                 yPosition += 5;
                 doc.setFont("times", "bold");
                 doc.setFontSize(9);
-                doc.setTextColor(180, 83, 9); // Amber-ish
+                doc.setTextColor(203, 161, 53); // Gold
                 doc.text("Evidentiary Sources:", margin, yPosition);
                 yPosition += 4;
                 
@@ -356,46 +356,46 @@ const ChatInterface = forwardRef<ChatInterfaceHandle, {}>((props, ref) => {
   };
 
   return (
-    <div className="flex flex-col h-full bg-[#0f1115] relative font-serif">
+    <div className="flex flex-col h-full bg-[#0A1A2F] relative font-sans">
       {/* PDF Generation Progress Overlay */}
       {isPdfGenerating && (
         <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm">
-            <div className="bg-slate-900 p-8 rounded-lg border border-slate-700 shadow-2xl max-w-sm w-full flex flex-col items-center">
-                <div className="w-12 h-12 mb-4 text-amber-500 animate-bounce">
+            <div className="bg-[#112240] p-8 border border-[#CBA135] shadow-2xl max-w-sm w-full flex flex-col items-center">
+                <div className="w-12 h-12 mb-4 text-[#CBA135] animate-bounce">
                     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
                 </div>
-                <h3 className="text-xl font-bold text-slate-200 serif mb-2">Exporting Brief</h3>
+                <h3 className="text-xl font-bold text-slate-200 serif-heading mb-2">Exporting Brief</h3>
                 <p className="text-slate-400 text-sm mb-6">Compiling legal memorandum and sources...</p>
                 
-                <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden mb-2">
+                <div className="w-full bg-[#0A1A2F] h-2 overflow-hidden mb-2 border border-slate-700">
                     <div 
-                        className="bg-amber-600 h-full transition-all duration-300 ease-out" 
+                        className="bg-[#00A86B] h-full transition-all duration-300 ease-out" 
                         style={{ width: `${pdfProgress}%` }}
                     ></div>
                 </div>
-                <span className="text-amber-500 font-mono text-xs">{pdfProgress}% Complete</span>
+                <span className="text-[#00A86B] font-mono text-xs">{pdfProgress}% Complete</span>
             </div>
         </div>
       )}
 
       {/* Header for Chat Area */}
-      <div className="flex items-center justify-between p-4 border-b border-white/10 bg-[#0f1115]/95 backdrop-blur-sm">
+      <div className="flex items-center justify-between p-4 border-b border-[#1E3A5F] bg-[#0A1A2F]/95 backdrop-blur-sm">
         <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></div>
-            <h2 className="text-slate-400 font-serif text-xs tracking-[0.2em] uppercase">Secure Legal Channel</h2>
+            <div className="w-2 h-2 rounded-none bg-[#00A86B] shadow-[0_0_8px_rgba(0,168,107,0.5)]"></div>
+            <h2 className="text-slate-400 font-sans text-xs tracking-[0.2em] uppercase font-bold">Secure Legal Channel</h2>
         </div>
         <button 
             onClick={handleDownloadPDF}
             disabled={isPdfGenerating}
-            className={`flex items-center gap-2 bg-amber-900/10 hover:bg-amber-900/20 text-amber-600 hover:text-amber-500 px-4 py-2 rounded border border-amber-900/30 transition-all text-xs tracking-wider uppercase ${isPdfGenerating ? 'opacity-50 cursor-not-allowed' : ''}`}
+            className={`flex items-center gap-2 bg-[#112240] hover:bg-[#1a2f55] text-[#CBA135] hover:text-[#e0c055] px-4 py-2 border border-[#CBA135]/40 transition-all text-xs tracking-wider uppercase font-semibold ${isPdfGenerating ? 'opacity-50 cursor-not-allowed' : ''}`}
         >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-            Export Brief (PDF)
+            Export Brief
         </button>
       </div>
 
       {/* Messages Area */}
-      <div className="flex-1 overflow-y-auto p-4 md:p-8 space-y-8 scrollbar-hide bg-[#0f1115]">
+      <div className="flex-1 overflow-y-auto p-4 md:p-8 space-y-8 scrollbar-hide bg-[#0A1A2F]">
         {messages.map((msg) => (
           <div 
             key={msg.id} 
@@ -404,31 +404,31 @@ const ChatInterface = forwardRef<ChatInterfaceHandle, {}>((props, ref) => {
             <div className={`flex max-w-[95%] md:max-w-[85%] ${msg.role === Role.USER ? 'flex-row-reverse' : 'flex-row'} items-start gap-4`}>
               
               {/* Avatar */}
-              <div className={`flex-shrink-0 w-8 h-8 rounded border flex items-center justify-center ${msg.role === Role.USER ? 'bg-slate-800 border-slate-700' : 'bg-amber-950/20 border-amber-900/30'}`}>
+              <div className={`flex-shrink-0 w-8 h-8 border flex items-center justify-center ${msg.role === Role.USER ? 'bg-[#112240] border-slate-700' : 'bg-[#081628] border-[#CBA135]/30'}`}>
                 {msg.role === Role.USER ? (
                   <svg className="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
                 ) : (
-                  <span className="text-xl leading-none text-amber-600 font-serif">§</span>
+                  <span className="text-xl leading-none text-[#CBA135] serif-heading font-bold">§</span>
                 )}
               </div>
 
               {/* Message Content */}
               <div className={`flex flex-col ${msg.role === Role.USER ? 'items-end' : 'items-start'} w-full`}>
                 <div 
-                    className={`relative group px-8 py-6 shadow-sm text-base md:text-lg leading-relaxed w-full font-serif ${
+                    className={`relative group px-8 py-6 shadow-sm text-base leading-relaxed w-full ${
                     msg.role === Role.USER 
-                        ? 'bg-[#1a1d24] text-slate-300 border border-slate-800 rounded-lg rounded-tr-none' 
-                        : 'bg-transparent text-slate-200 border-l-4 border-amber-800 pl-6'
+                        ? 'bg-[#112240] text-slate-300 border border-slate-700 font-sans' 
+                        : 'bg-transparent text-slate-200 border-l-2 border-[#CBA135] pl-6 font-serif'
                     }`}
                 >
                   {msg.role === Role.MODEL && !msg.isStreaming && (
                     <button
                         onClick={() => handleCopy(msg.text, msg.id)}
-                        className="absolute top-2 right-2 p-2 text-slate-500 hover:text-amber-500 bg-[#0f1115] border border-slate-800 rounded opacity-0 group-hover:opacity-100 transition-all duration-200 shadow-sm z-10"
+                        className="absolute top-2 right-2 p-2 text-slate-500 hover:text-[#CBA135] bg-[#0A1A2F] border border-slate-800 opacity-0 group-hover:opacity-100 transition-all duration-200 shadow-sm z-10"
                         title="Copy to clipboard"
                     >
                         {copiedMessageId === msg.id ? (
-                            <svg className="w-4 h-4 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                            <svg className="w-4 h-4 text-[#00A86B]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                         ) : (
                             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
                         )}
@@ -437,9 +437,9 @@ const ChatInterface = forwardRef<ChatInterfaceHandle, {}>((props, ref) => {
 
                   {msg.role === Role.MODEL && !msg.text && msg.isStreaming ? (
                     <div className="flex space-x-2 h-6 items-center">
-                      <div className="w-1.5 h-1.5 bg-amber-600 rounded-full animate-pulse"></div>
-                      <div className="w-1.5 h-1.5 bg-amber-600 rounded-full animate-pulse delay-100"></div>
-                      <div className="w-1.5 h-1.5 bg-amber-600 rounded-full animate-pulse delay-200"></div>
+                      <div className="w-1.5 h-1.5 bg-[#CBA135] animate-pulse"></div>
+                      <div className="w-1.5 h-1.5 bg-[#CBA135] animate-pulse delay-100"></div>
+                      <div className="w-1.5 h-1.5 bg-[#CBA135] animate-pulse delay-200"></div>
                     </div>
                   ) : (
                     <MarkdownRenderer content={msg.text} />
@@ -448,10 +448,10 @@ const ChatInterface = forwardRef<ChatInterfaceHandle, {}>((props, ref) => {
 
                 {/* Grounding Sources - Display specific government websites */}
                 {msg.groundingChunks && msg.groundingChunks.length > 0 && (
-                    <div className="mt-4 text-xs text-slate-500 bg-[#13151a] p-4 rounded border border-slate-800/50 w-full ml-0 md:ml-6 max-w-2xl">
+                    <div className="mt-4 text-xs text-slate-500 bg-[#081628] p-4 border border-[#1E3A5F] w-full ml-0 md:ml-6 max-w-2xl">
                         <div className="flex items-center gap-2 mb-2">
-                             <svg className="w-3 h-3 text-amber-600" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm0 3.99L19.53 19H4.47L12 5.99zM11 16h2v2h-2zm0-6h2v4h-2z"/></svg>
-                             <span className="font-bold text-amber-700/80 uppercase tracking-widest text-[10px]">Evidentiary Authorities & Sources:</span>
+                             <svg className="w-3 h-3 text-[#CBA135]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm0 3.99L19.53 19H4.47L12 5.99zM11 16h2v2h-2zm0-6h2v4h-2z"/></svg>
+                             <span className="font-bold text-[#CBA135]/80 uppercase tracking-widest text-[10px]">Evidentiary Authorities:</span>
                         </div>
                         <div className="flex flex-wrap gap-2">
                             {/* Deduplicate chunks by URI before rendering */}
@@ -471,25 +471,25 @@ const ChatInterface = forwardRef<ChatInterfaceHandle, {}>((props, ref) => {
                                         target="_blank" 
                                         rel="noopener noreferrer"
                                         className={`
-                                            flex items-center gap-2 px-3 py-2 rounded border transition-all duration-300 group
+                                            flex items-center gap-2 px-3 py-2 border transition-all duration-300 group
                                             ${isGov 
-                                                ? 'bg-amber-950/20 border-amber-900/50 text-amber-500 hover:bg-amber-900/30 shadow-[0_0_10px_rgba(180,83,9,0.1)]' 
+                                                ? 'bg-[#112240] border-[#CBA135]/40 text-[#CBA135] hover:bg-[#1a2f55] shadow-[0_0_10px_rgba(203,161,53,0.1)]' 
                                                 : isKanoon
-                                                    ? 'bg-slate-800/50 border-slate-700 text-slate-300 hover:border-slate-500'
-                                                    : 'bg-[#1a1d24] border-slate-800 text-slate-400 hover:border-slate-600'
+                                                    ? 'bg-[#112240] border-slate-700 text-slate-300 hover:border-slate-500'
+                                                    : 'bg-[#0A1A2F] border-slate-800 text-slate-400 hover:border-slate-600'
                                             }
                                         `}
                                     >
                                         {isGov ? (
-                                            <svg className="w-3 h-3 text-amber-500 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 19h20L12 2zm0 3l6 11H6l6-11zm-1 11h2v2h-2v-2zm0-7h2v5h-2V9z"/></svg> 
+                                            <svg className="w-3 h-3 text-[#CBA135] flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 19h20L12 2zm0 3l6 11H6l6-11zm-1 11h2v2h-2v-2zm0-7h2v5h-2V9z"/></svg> 
                                         ) : (
                                             <svg className="w-3 h-3 opacity-50 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg>
                                         )}
                                         <div className="flex flex-col">
-                                            <span className="truncate max-w-[200px] font-serif text-[11px] font-medium leading-none mb-0.5">
+                                            <span className="truncate max-w-[200px] font-sans text-[11px] font-medium leading-none mb-0.5">
                                                 {chunk.web.title || new URL(chunk.web.uri).hostname.replace('www.', '')}
                                             </span>
-                                            {isGov && <span className="text-[9px] text-amber-700 uppercase tracking-wider font-bold">Official Record</span>}
+                                            {isGov && <span className="text-[9px] text-[#CBA135] uppercase tracking-wider font-bold">Official Record</span>}
                                         </div>
                                     </a>
                                 )
@@ -512,16 +512,16 @@ const ChatInterface = forwardRef<ChatInterfaceHandle, {}>((props, ref) => {
       </div>
 
       {/* Input Area */}
-      <div className="p-4 md:p-8 bg-[#0f1115] border-t border-slate-900 z-10">
-        <div className="max-w-5xl mx-auto relative flex items-end gap-3 bg-[#16181d] p-4 rounded-lg border border-slate-800 focus-within:border-amber-800/50 transition-all shadow-2xl">
+      <div className="p-4 md:p-8 bg-[#0A1A2F] border-t border-[#1E3A5F] z-10">
+        <div className="max-w-5xl mx-auto relative flex items-end gap-3 bg-[#112240] p-4 border border-[#1E3A5F] focus-within:border-[#CBA135]/50 transition-all shadow-xl">
             
             {/* Voice Input Button */}
             <button
                 onClick={toggleVoiceInput}
-                className={`p-3 rounded-full mb-0.5 transition-all duration-200 ${
+                className={`p-3 mb-0.5 transition-all duration-200 border ${
                     isListening 
-                    ? 'bg-red-900/20 text-red-500 animate-pulse border border-red-900/50' 
-                    : 'text-slate-500 hover:text-amber-600 hover:bg-slate-800'
+                    ? 'bg-red-900/20 text-red-500 animate-pulse border-red-900/50' 
+                    : 'text-slate-500 hover:text-[#CBA135] border-transparent hover:bg-[#0A1A2F]'
                 }`}
                 title="Dictate Query (Indian English)"
             >
@@ -537,7 +537,7 @@ const ChatInterface = forwardRef<ChatInterfaceHandle, {}>((props, ref) => {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder={isListening ? "Listening to counsel..." : "Dictate or type case law, citation, or procedural query..."}
-                className="w-full bg-transparent border-none focus:ring-0 text-slate-200 placeholder-slate-600 resize-none max-h-48 min-h-[50px] py-3 px-2 text-lg font-serif"
+                className="w-full bg-transparent border-none focus:ring-0 text-slate-200 placeholder-slate-600 resize-none max-h-48 min-h-[50px] py-3 px-2 text-lg font-sans"
                 rows={1}
                 style={{ height: 'auto', minHeight: '50px' }}
                 onInput={(e) => {
@@ -549,10 +549,10 @@ const ChatInterface = forwardRef<ChatInterfaceHandle, {}>((props, ref) => {
             <button
                 onClick={handleSend}
                 disabled={!input.trim() || isLoading}
-                className={`p-3 rounded-full mb-0.5 transition-all duration-200 border ${
+                className={`p-3 mb-0.5 transition-all duration-200 border ${
                     input.trim() && !isLoading 
-                    ? 'bg-amber-800 text-white hover:bg-amber-700 border-amber-700 shadow-lg' 
-                    : 'bg-slate-800 text-slate-600 border-slate-700 cursor-not-allowed'
+                    ? 'bg-[#00A86B] text-white hover:bg-[#008C59] border-[#008C59] shadow-lg' 
+                    : 'bg-[#0A1A2F] text-slate-600 border-[#1E3A5F] cursor-not-allowed'
                 }`}
             >
                 {isLoading ? (
@@ -566,7 +566,7 @@ const ChatInterface = forwardRef<ChatInterfaceHandle, {}>((props, ref) => {
             </button>
         </div>
         <div className="text-center mt-4">
-            <p className="text-[9px] text-slate-700 uppercase tracking-[0.2em] font-sans">
+            <p className="text-[9px] text-slate-600 uppercase tracking-[0.2em] font-sans">
                 Privileged & Confidential Work Product
             </p>
         </div>

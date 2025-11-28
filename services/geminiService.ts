@@ -102,6 +102,9 @@ export const generateExamPaper = async (examName: string, onProgress?: (length: 
             prompt = `
                 You are a senior Legal Academician. Retrieve and reconstruct the **FULL-LENGTH** question paper for: **${examName}**.
                 
+                **FAIL-SAFE INSTRUCTION:**
+                If the exact historical text for "${examName}" is not fully indexed or unavailable in the search results, YOU MUST GENERATE A HIGH-FIDELITY **MODEL EXAM PAPER** based on the official Bar Council syllabus for this specific year and subject. Do not return an error stating "unable to retrieve". Create a perfect simulation for study purposes.
+
                 **OBJECTIVE:**
                 Create a comprehensive study document (approx 15-20 pages equivalent) containing the questions AND detailed model answers.
 
@@ -122,7 +125,7 @@ export const generateExamPaper = async (examName: string, onProgress?: (length: 
                 **Q2:** [Question Text]
                 **Model Answer Synopsis:** [Provide a detailed 150-word legal note]
                 
-                ... (Continue for all Part A questions found)
+                ... (Continue for all Part A questions found or modelled)
 
                 **PART - B (Essay/Analysis)**
                 *Instructions: Answer any THREE. (3 x 15 = 45 Marks)*
@@ -130,7 +133,7 @@ export const generateExamPaper = async (examName: string, onProgress?: (length: 
                 **Q7:** [Question Text]
                 **Comprehensive Model Answer:** [Provide a detailed 400-word essay structure. Include Introduction, Body Paragraphs with Case Laws, and Conclusion.]
                 
-                ... (Continue for all Part B questions found)
+                ... (Continue for all Part B questions found or modelled)
                 
                 **PART - C (Problem Solving)**
                 *Instructions: Answer any ONE. (1 x 30 = 30 Marks)*
@@ -196,7 +199,7 @@ export const generateExamPaper = async (examName: string, onProgress?: (length: 
         }
 
         const result = await ai.models.generateContentStream({
-            model: 'gemini-2.5-flash',
+            model: 'gemini-3-pro-preview', // Using Pro model for larger context window
             contents: prompt,
             config: {
                 temperature: 0.1,
@@ -223,41 +226,64 @@ export const generateExamPaper = async (examName: string, onProgress?: (length: 
     }
 };
 
-export const generateMockTestQuestions = async (): Promise<MockQuestion[]> => {
+export const generateMockTestQuestions = async (count: number = 10): Promise<MockQuestion[]> => {
     try {
         const prompt = `
             Generate a **Mock Test for the All India Bar Examination (AIBE)**.
-            Create 10 challenging multiple-choice questions covering: 
-            - Constitutional Law
-            - IPC / BNS
-            - CrPC / BNSS
-            - Evidence Act / BSA
-            - Professional Ethics
+            Create strictly **${count}** multiple-choice questions.
             
-            **OUTPUT FORMAT:**
-            Return ONLY valid JSON. The structure must be:
+            **SOURCE MATERIAL:**
+            You MUST source these questions from **PREVIOUS AIBE EXAM PAPERS (Years 2011-2023)**.
+            
+            **SUBJECT DISTRIBUTION:**
+            Ensure a mix of: Constitutional Law, IPC, CrPC, CPC, Evidence Act, Family Law, Contract Law.
+            
+            **CRITICAL CONSTRAINTS FOR JSON:**
+            1. Return ONLY valid JSON. No markdown (\`\`\`).
+            2. **Keep "rationale" EXTREMELY concise (max 15 words)**. This is VITAL to prevent response truncation.
+            3. Do not include newlines in strings.
+            
+            The structure must be:
             [
                 {
                     "id": 1,
                     "question": "Question Text",
-                    "options": ["Option A", "Option B", "Option C", "Option D"],
+                    "options": ["A", "B", "C", "D"],
                     "correctAnswerIndex": 0,
-                    "rationale": "Brief explanation of why A is correct citing section/case.",
+                    "rationale": "Short citation.",
                     "subject": "Constitutional Law"
                 }
             ]
         `;
 
         const result: GenerateContentResponse = await ai.models.generateContent({
-            model: 'gemini-2.5-flash',
+            model: 'gemini-3-pro-preview', // Switched to Pro for larger output context
             contents: prompt,
             config: {
-                temperature: 0.4,
-                responseMimeType: "application/json"
+                temperature: 0.3,
+                responseMimeType: "application/json",
+                maxOutputTokens: 8192
             }
         });
 
-        const jsonText = result.text || "[]";
+        let jsonText = result.text || "[]";
+        
+        // Robust Markdown Stripping & cleanup
+        jsonText = jsonText.trim();
+        if (jsonText.startsWith('```json')) {
+            jsonText = jsonText.replace(/^```json/, '').replace(/```$/, '');
+        } else if (jsonText.startsWith('```')) {
+            jsonText = jsonText.replace(/^```/, '').replace(/```$/, '');
+        }
+        
+        // Attempt to auto-close if truncated (basic rescue)
+        if (!jsonText.endsWith(']')) {
+            const lastClosingBrace = jsonText.lastIndexOf('}');
+            if (lastClosingBrace !== -1) {
+                jsonText = jsonText.substring(0, lastClosingBrace + 1) + ']';
+            }
+        }
+
         return JSON.parse(jsonText);
     } catch (error) {
         console.error("Mock Test Generation Error:", error);
